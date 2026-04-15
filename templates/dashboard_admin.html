@@ -1,28 +1,37 @@
 {% extends "base.html" %}
 {% block title %}Dashboard Admin{% endblock %}
 {% block content %}
-<h1 style="margin-bottom:1.5rem;">👋 Olá, {{ current_user.nome }}</h1>
+<div class="page-header">
+  <div>
+    <h1>Olá, {{ current_user.nome }} 👋</h1>
+    <p class="subtitle">Painel de controle administrativo</p>
+  </div>
+</div>
 
 <div class="stats-grid">
   <div class="stat-card">
-    <div class="stat-value">📊</div>
-    <div class="stat-label">Análises de Desastres</div>
-    <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-primary btn-sm mt-1">Ver todas</a>
+    <div class="stat-icon">📊</div>
+    <div class="stat-label">Análises</div>
+    <div class="stat-value">Desastres</div>
+    <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline btn-sm">Ver todas →</a>
   </div>
   <div class="stat-card">
-    <div class="stat-value">➕</div>
-    <div class="stat-label">Nova Análise</div>
-    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-success btn-sm mt-1">Criar</a>
+    <div class="stat-icon">➕</div>
+    <div class="stat-label">Registrar</div>
+    <div class="stat-value">Nova Análise</div>
+    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-primary btn-sm">Criar →</a>
   </div>
   <div class="stat-card">
-    <div class="stat-value">👤</div>
-    <div class="stat-label">Administradores</div>
-    <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-primary btn-sm mt-1">Gerenciar</a>
+    <div class="stat-icon">👤</div>
+    <div class="stat-label">Gestão</div>
+    <div class="stat-value">Admins</div>
+    <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-outline btn-sm">Gerenciar →</a>
   </div>
   <div class="stat-card">
-    <div class="stat-value">👥</div>
-    <div class="stat-label">Clientes</div>
-    <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-primary btn-sm mt-1">Gerenciar</a>
+    <div class="stat-icon">👥</div>
+    <div class="stat-label">Gestão</div>
+    <div class="stat-value">Clientes</div>
+    <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline btn-sm">Gerenciar →</a>
   </div>
 </div>
 {% endblock %}

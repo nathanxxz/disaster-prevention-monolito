@@ -1,22 +1,58 @@
 {% extends "base.html" %}
 {% block title %}Detalhes da Análise{% endblock %}
 {% block content %}
+<div class="page-header">
+  <div>
+    <h1>📋 Detalhes da Análise</h1>
+    {% if desastre %}<p class="subtitle">#{{ desastre.id }} — {{ desastre.cidade }}/{{ desastre.estado }}</p>{% endif %}
+  </div>
+  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline">← Voltar</a>
+</div>
+
 {% if desastre %}
-<div class="card" style="max-width:600px;margin:2rem auto;">
-  <div class="card-header">📋 Detalhes da Análise #{{ desastre.id }}</div>
-  <p><strong>Cidade:</strong> {{ desastre.cidade }} - {{ desastre.estado }}</p>
-  <p><strong>Chuva do dia:</strong> {{ desastre.chuva_dia }} mm</p>
-  <p><strong>Acumulado 3 dias:</strong> {{ desastre.acumulado_3d }} mm</p>
-  <p><strong>Acumulado 7 dias:</strong> {{ desastre.acumulado_7d }} mm</p>
-  <p><strong>Nível de risco:</strong> {{ desastre.risco_nivel }}</p>
-  <p><strong>Probabilidade:</strong> {{ desastre.risco_probabilidade }}%</p>
-  <p><strong>Data da análise:</strong> {{ desastre.data_analise }}</p>
-  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline mt-2">← Voltar</a>
+<div class="card">
+  <div class="card-header">Informações da Análise</div>
+  <div class="detail-row">
+    <span class="detail-label">Localização</span>
+    <span class="detail-value">{{ desastre.cidade }} — {{ desastre.estado }}</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Chuva do dia</span>
+    <span class="detail-value text-mono">{{ desastre.chuva_dia }} mm</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Acumulado 3 dias</span>
+    <span class="detail-value text-mono">{{ desastre.acumulado_3d }} mm</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Acumulado 7 dias</span>
+    <span class="detail-value text-mono">{{ desastre.acumulado_7d }} mm</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Nível de risco</span>
+    <span class="detail-value">
+      {% if desastre.risco_nivel == 'Crítico' %}<span class="badge badge-danger">{{ desastre.risco_nivel }}</span>
+      {% elif desastre.risco_nivel == 'Alto'  %}<span class="badge badge-warning">{{ desastre.risco_nivel }}</span>
+      {% elif desastre.risco_nivel == 'Moderado' %}<span class="badge badge-info">{{ desastre.risco_nivel }}</span>
+      {% else %}<span class="badge badge-success">{{ desastre.risco_nivel }}</span>
+      {% endif %}
+    </span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Probabilidade</span>
+    <span class="detail-value text-mono">{{ desastre.risco_probabilidade }}%</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Data da análise</span>
+    <span class="detail-value">{{ desastre.data_analise }}</span>
+  </div>
 </div>
 {% else %}
-<div class="card text-center">
-  <p class="text-muted">{{ error or 'Análise não encontrada.' }}</p>
-  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline mt-1">← Voltar</a>
+<div class="empty-state">
+  <div class="empty-icon">⚠️</div>
+  <h3>Análise não encontrada</h3>
+  <p>{{ error or 'O registro solicitado não existe.' }}</p>
+  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline">← Voltar</a>
 </div>
 {% endif %}
 {% endblock %}

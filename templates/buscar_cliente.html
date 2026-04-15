@@ -1,14 +1,42 @@
 {% extends "base.html" %}
 {% block title %}Detalhes Cliente{% endblock %}
 {% block content %}
+<div class="page-header">
+  <div>
+    <h1>👥 Perfil Cliente</h1>
+    {% if cliente %}<p class="subtitle">#{{ cliente.id }}</p>{% endif %}
+  </div>
+  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline">← Voltar</a>
+</div>
+
 {% if cliente %}
-<div class="card" style="max-width:500px;margin:2rem auto;">
-  <div class="card-header">👤 Cliente #{{ cliente.id }}</div>
-  <p><strong>Nome:</strong> {{ cliente.nome }}</p>
-  <p><strong>Email:</strong> {{ cliente.email }}</p>
-  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline mt-2">← Voltar</a>
+<div class="profile-card">
+  <div class="profile-header">
+    <div class="avatar">{{ cliente.nome[0] | upper }}</div>
+    <div>
+      <div class="profile-name">{{ cliente.nome }}</div>
+      <div class="profile-role">Cliente</div>
+    </div>
+  </div>
+  <div class="profile-body">
+    <div class="detail-row">
+      <span class="detail-label">E-mail</span>
+      <span class="detail-value">{{ cliente.email }}</span>
+    </div>
+    <div class="detail-row" style="border:none;padding-bottom:0;">
+      <span class="detail-label">Ações</span>
+      <span class="detail-value">
+        <a href="{{ url_for('cliente.atualizarCliente', id=cliente.id) }}" class="btn btn-outline btn-sm">Editar</a>
+      </span>
+    </div>
+  </div>
 </div>
 {% else %}
-<div class="card text-center"><p class="text-muted">{{ error or 'Cliente não encontrado.' }}</p></div>
+<div class="empty-state">
+  <div class="empty-icon">👥</div>
+  <h3>Cliente não encontrado</h3>
+  <p>{{ error or 'O cliente não existe.' }}</p>
+  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline">← Voltar</a>
+</div>
 {% endif %}
 {% endblock %}

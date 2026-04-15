@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Análises de Desastres{% endblock %}
 {% block content %}
-<div class="flex-between mb-2">
-  <h1>📊 Análises de Desastres</h1>
+<div class="page-header">
+  <div>
+    <h1>📊 Análises de Desastres</h1>
+    <p class="subtitle">Registros de monitoramento pluviométrico</p>
+  </div>
   {% if current_user.is_admin %}
-    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-success">➕ Nova Análise</a>
+    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-primary">＋ Nova Análise</a>
   {% endif %}
 </div>
 
 {% if desastres %}
-<div class="card" style="padding:0;overflow:hidden;">
+<div class="table-wrap">
   <div class="table-responsive">
     <table>
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Cidade</th>
-          <th>UF</th>
-          <th>Chuva/dia</th>
+          <th>#</th>
+          <th>Localização</th>
+          <th>Chuva / dia</th>
           <th>Acum. 3d</th>
           <th>Acum. 7d</th>
-          <th>Risco</th>
+          <th>Nível</th>
           <th>Prob.</th>
           <th>Data</th>
           {% if current_user.is_admin %}<th>Ações</th>{% endif %}
@@ -29,12 +31,14 @@
       <tbody>
         {% for d in desastres %}
         <tr>
-          <td>{{ d.id }}</td>
-          <td>{{ d.cidade }}</td>
-          <td>{{ d.estado }}</td>
-          <td>{{ d.chuva_dia }} mm</td>
-          <td>{{ d.acumulado_3d }} mm</td>
-          <td>{{ d.acumulado_7d }} mm</td>
+          <td class="text-mono" style="color:var(--text-muted);">{{ d.id }}</td>
+          <td>
+            <span style="font-weight:700;color:var(--text);">{{ d.cidade }}</span>
+            <span style="color:var(--text-muted);font-size:0.8rem;margin-left:0.3rem;">{{ d.estado }}</span>
+          </td>
+          <td class="text-mono">{{ d.chuva_dia }} mm</td>
+          <td class="text-mono">{{ d.acumulado_3d }} mm</td>
+          <td class="text-mono">{{ d.acumulado_7d }} mm</td>
           <td>
             {% if d.risco_nivel == 'Crítico' %}
               <span class="badge badge-danger">{{ d.risco_nivel }}</span>
@@ -46,14 +50,16 @@
               <span class="badge badge-success">{{ d.risco_nivel }}</span>
             {% endif %}
           </td>
-          <td>{{ d.risco_probabilidade }}%</td>
-          <td>{{ d.data_analise }}</td>
+          <td class="text-mono">{{ d.risco_probabilidade }}%</td>
+          <td style="color:var(--text-muted);font-size:0.82rem;">{{ d.data_analise }}</td>
           {% if current_user.is_admin %}
           <td>
-            <a href="{{ url_for('desastres.atualizarDesastre', id=d.id) }}" class="btn btn-primary btn-sm">Editar</a>
-            <form method="POST" action="{{ url_for('desastres.excluirDesastre', id=d.id) }}" style="display:inline;" data-confirm="Excluir esta análise?">
-              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-            </form>
+            <div class="table-actions">
+              <a href="{{ url_for('desastres.atualizarDesastre', id=d.id) }}" class="btn btn-outline btn-sm">Editar</a>
+              <form method="POST" action="{{ url_for('desastres.excluirDesastre', id=d.id) }}" style="display:inline;" onsubmit="return confirm('Excluir esta análise?')">
+                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+              </form>
+            </div>
           </td>
           {% endif %}
         </tr>
@@ -63,10 +69,12 @@
   </div>
 </div>
 {% else %}
-<div class="card text-center">
-  <p class="text-muted">Nenhuma análise cadastrada ainda.</p>
+<div class="empty-state">
+  <div class="empty-icon">🌧️</div>
+  <h3>Nenhuma análise registrada</h3>
+  <p>Comece registrando a primeira análise de risco.</p>
   {% if current_user.is_admin %}
-    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-primary mt-1">Criar primeira análise</a>
+    <a href="{{ url_for('desastres.criarDesastre') }}" class="btn btn-primary">Criar primeira análise</a>
   {% endif %}
 </div>
 {% endif %}

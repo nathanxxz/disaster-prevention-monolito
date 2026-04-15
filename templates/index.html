@@ -1,13 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Disaster Prevention - Início{% endblock %}
+{% block title %}Disaster Prevention — Início{% endblock %}
 {% block content %}
 <div class="hero">
-  <h1>🛡️ Disaster Prevention</h1>
-  <p>Sistema de prevenção e análise de desastres naturais. Monitore riscos de enchentes e deslizamentos com base em dados pluviométricos.</p>
-  <div class="hero-actions">
-    <a href="{{ url_for('admin.loginUsuarioAdmin') }}" class="btn btn-primary">Login Admin</a>
-    <a href="{{ url_for('cliente.loginUsuarioCliente') }}" class="btn btn-outline">Login Cliente</a>
+  <div class="hero-eyebrow">
+    <span>⚡</span> Sistema de Monitoramento Ativo
   </div>
-  <p class="mt-2 text-muted">Não tem conta? <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastre-se como Admin</a> ou <a href="{{ url_for('cliente.criarUsuarioCliente') }}">como Cliente</a></p>
+  <h1>Prevenção de<br><span>Desastres Naturais</span></h1>
+  <p>Monitore riscos de enchentes e deslizamentos com dados pluviométricos em tempo real. Tome decisões com base em análises precisas.</p>
+  <div class="hero-actions">
+    <a href="{{ url_for('admin.loginUsuarioAdmin') }}" class="btn btn-primary btn-lg">Acessar como Admin</a>
+    <a href="{{ url_for('cliente.loginUsuarioCliente') }}" class="btn btn-outline btn-lg">Acessar como Cliente</a>
+  </div>
+  <p class="hero-meta">
+    Não tem conta?
+    <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastro Admin</a>
+    &nbsp;·&nbsp;
+    <a href="{{ url_for('cliente.criarUsuarioCliente') }}">Cadastro Cliente</a>
+  </p>
 </div>
 {% endblock %}

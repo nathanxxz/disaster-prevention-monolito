@@ -1,14 +1,42 @@
 {% extends "base.html" %}
 {% block title %}Detalhes Admin{% endblock %}
 {% block content %}
+<div class="page-header">
+  <div>
+    <h1>👤 Perfil Admin</h1>
+    {% if admin %}<p class="subtitle">#{{ admin.id }}</p>{% endif %}
+  </div>
+  <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-outline">← Voltar</a>
+</div>
+
 {% if admin %}
-<div class="card" style="max-width:500px;margin:2rem auto;">
-  <div class="card-header">👤 Admin #{{ admin.id }}</div>
-  <p><strong>Nome:</strong> {{ admin.nome }}</p>
-  <p><strong>Email:</strong> {{ admin.email }}</p>
-  <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-outline mt-2">← Voltar</a>
+<div class="profile-card">
+  <div class="profile-header">
+    <div class="avatar">{{ admin.nome[0] | upper }}</div>
+    <div>
+      <div class="profile-name">{{ admin.nome }}</div>
+      <div class="profile-role">Administrador</div>
+    </div>
+  </div>
+  <div class="profile-body">
+    <div class="detail-row">
+      <span class="detail-label">E-mail</span>
+      <span class="detail-value">{{ admin.email }}</span>
+    </div>
+    <div class="detail-row" style="border:none;padding-bottom:0;">
+      <span class="detail-label">Ações</span>
+      <span class="detail-value">
+        <a href="{{ url_for('admin.atualizarAdmin', id=admin.id) }}" class="btn btn-outline btn-sm">Editar</a>
+      </span>
+    </div>
+  </div>
 </div>
 {% else %}
-<div class="card text-center"><p class="text-muted">{{ error or 'Admin não encontrado.' }}</p></div>
+<div class="empty-state">
+  <div class="empty-icon">👤</div>
+  <h3>Admin não encontrado</h3>
+  <p>{{ error or 'O administrador não existe.' }}</p>
+  <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-outline">← Voltar</a>
+</div>
 {% endif %}
 {% endblock %}

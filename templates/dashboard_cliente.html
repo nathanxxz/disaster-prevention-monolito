@@ -1,20 +1,41 @@
 {% extends "base.html" %}
-{% block title %}Dashboard Cliente{% endblock %}
+{% block title %}Dashboard{% endblock %}
 {% block content %}
-<h1 style="margin-bottom:1.5rem;">👋 Olá, {{ current_user.nome }}</h1>
-
-<div class="stats-grid">
-  <div class="stat-card">
-    <div class="stat-value">📊</div>
-    <div class="stat-label">Análises de Desastres</div>
-    <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-primary btn-sm mt-1">Ver análises</a>
+<div class="page-header">
+  <div>
+    <h1>Olá, {{ current_user.nome }} 👋</h1>
+    <p class="subtitle">Visualize as análises de risco disponíveis</p>
   </div>
 </div>
 
-<div class="card">
-  <div class="card-header">Informações do perfil</div>
-  <p><strong>Nome:</strong> {{ current_user.nome }}</p>
-  <p><strong>Email:</strong> {{ current_user.email }}</p>
-  <a href="{{ url_for('cliente.atualizarCliente', id=current_user.id) }}" class="btn btn-outline btn-sm mt-1">Editar perfil</a>
+<div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
+  <div class="stat-card">
+    <div class="stat-icon">📊</div>
+    <div class="stat-label">Disponível</div>
+    <div class="stat-value">Análises</div>
+    <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-primary btn-sm">Ver análises →</a>
+  </div>
+</div>
+
+<div class="profile-card">
+  <div class="profile-header">
+    <div class="avatar">{{ current_user.nome[0] | upper }}</div>
+    <div>
+      <div class="profile-name">{{ current_user.nome }}</div>
+      <div class="profile-role">Cliente</div>
+    </div>
+  </div>
+  <div class="profile-body">
+    <div class="detail-row">
+      <span class="detail-label">E-mail</span>
+      <span class="detail-value">{{ current_user.email }}</span>
+    </div>
+    <div class="detail-row" style="border:none; padding-bottom:0;">
+      <span class="detail-label">Ações</span>
+      <span class="detail-value">
+        <a href="{{ url_for('cliente.atualizarCliente', id=current_user.id) }}" class="btn btn-outline btn-sm">Editar perfil</a>
+      </span>
+    </div>
+  </div>
 </div>
 {% endblock %}

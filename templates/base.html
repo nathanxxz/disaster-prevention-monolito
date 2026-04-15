@@ -4,34 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Disaster Prevention{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar">
-    <a class="navbar-brand" href="{{ url_for('home') }}">🛡️ Disaster Prevention</a>
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+      <div class="brand-icon">🛡️</div>
+      <span class="brand-text">Disaster Prevention</span>
+    </a>
     <ul class="navbar-nav">
       {% if current_user.is_authenticated %}
         <li><a href="{{ url_for('desastres.listarDesastres') }}">📊 Análises</a></li>
         {% if current_user.is_admin %}
-          <li><a href="{{ url_for('desastres.criarDesastre') }}">➕ Nova Análise</a></li>
+          <li><a href="{{ url_for('desastres.criarDesastre') }}">＋ Nova Análise</a></li>
+          <div class="navbar-divider"></div>
           <li><a href="{{ url_for('admin.listarAdmins') }}">👤 Admins</a></li>
           <li><a href="{{ url_for('cliente.listarClientes') }}">👥 Clientes</a></li>
         {% endif %}
+        <div class="navbar-divider"></div>
         <li>
-          <form action="{% if current_user.is_admin %}{{ url_for('admin.logout_admin') }}{% else %}{{ url_for('cliente.logout_cliente') }}{% endif %}" method="POST" style="display:inline">
-            <button type="submit" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.5);">Sair</button>
+          <form action="{% if current_user.is_admin %}{{ url_for('admin.logoutUsuarioAdmin') }}{% else %}{{ url_for('cliente.logoutUsuarioCliente') }}{% endif %}" method="POST" style="display:inline">
+            <button type="submit" class="btn btn-outline btn-sm">Sair</button>
           </form>
         </li>
       {% else %}
-        <li><a href="{{ url_for('admin.loginUsuarioAdmin') }}">Admin Login</a></li>
-        <li><a href="{{ url_for('cliente.loginUsuarioCliente') }}">Cliente Login</a></li>
+        <li><a href="{{ url_for('admin.loginUsuarioAdmin') }}">Admin</a></li>
+        <li><a href="{{ url_for('cliente.loginUsuarioCliente') }}">Cliente</a></li>
       {% endif %}
     </ul>
   </nav>
 
-  <!-- FLASH MESSAGES -->
   <div class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -44,6 +50,5 @@
     {% block content %}{% endblock %}
   </div>
 
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
