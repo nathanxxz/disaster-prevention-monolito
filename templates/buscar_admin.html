@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Detalhes Admin{% endblock %}
+{% block content %}
+{% if admin %}
+<div class="card" style="max-width:500px;margin:2rem auto;">
+  <div class="card-header">👤 Admin #{{ admin.id }}</div>
+  <p><strong>Nome:</strong> {{ admin.nome }}</p>
+  <p><strong>Email:</strong> {{ admin.email }}</p>
+  <a href="{{ url_for('admin.listar_admins') }}" class="btn btn-outline mt-2">← Voltar</a>
+</div>
+{% else %}
+<div class="card text-center"><p class="text-muted">{{ error or 'Admin não encontrado.' }}</p></div>
+{% endif %}
+{% endblock %}

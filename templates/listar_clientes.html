@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<div class="flex-between mb-2">
+  <h1>👥 Clientes</h1>
+</div>
+{% if clientes %}
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-responsive">
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Ações</th></tr></thead>
+      <tbody>
+        {% for c in clientes %}
+        <tr>
+          <td>{{ c.id }}</td><td>{{ c.nome }}</td><td>{{ c.email }}</td>
+          <td>
+            <a href="{{ url_for('cliente.atualizar_cliente', id=c.id) }}" class="btn btn-primary btn-sm">Editar</a>
+            <form method="POST" action="{{ url_for('cliente.excluir_cliente', id=c.id) }}" style="display:inline;" data-confirm="Excluir este cliente?">
+              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="card text-center"><p class="text-muted">Nenhum cliente cadastrado.</p></div>
+{% endif %}
+{% endblock %}

@@ -17,7 +17,7 @@ def loginUsuarioCliente():
 
     if(request.method == "POST"):
       clienteDAO.loginUsuarioCliente()
-      return render_template("loginCliente.html")
+      return render_template("login_cliente.html")
     
   except Exception as e:
     print(e)
@@ -29,7 +29,7 @@ def logoutUsuarioCliente():
 
     if(request.method == "POST"):
       clienteDAO.logoutCliente()
-      return render_template("loginCliente.html")
+      return render_template("login_cliente.html")
     
   except Exception as e:
     print(e)
@@ -41,7 +41,7 @@ def criarUsuarioCliente():
        
      if(request.method == "POST"):
       clienteDAO.criarUsuarioCliente()
-      return render_template("cadastroCliente.html")
+      return render_template("cadastro_cliente.html")
     
     except Exception as e:
       print(e)
@@ -54,7 +54,7 @@ def buscarUsuarioClientePorID(id):
 
     if(request.method == "GET"):
       clienteDAO.buscarUsuarioClientePorID(id)
-      return render_template("buscarCliente.html")
+      return render_template("buscar_cliente.html")
     
   except Exception as e:
     print(e)
@@ -67,7 +67,7 @@ def listarClientes():
 
     if(request.method == "GET"):
       clienteDAO.listarTodosUsuariosClientes()
-      return render_template("listarCliente.html")
+      return render_template("listar_cliente.html")
     
   except Exception as e:
     print(e)
@@ -79,7 +79,7 @@ def excluirUsuarioCliente(id):
 
     if(request.method == "POST"):
       clienteDAO.excluirUsuarioCliente(id)
-      return render_template("excluirCliente.html")
+      return render_template("excluir_cliente.html")
     
   except Exception as e:
     print(e)
@@ -91,7 +91,7 @@ def atualizarCliente(id):
 
     if(request.method == "POST"):
       clienteDAO.atualizarUsuarioCliente(id)
-      return render_template("atualizarCliente.html")
+      return render_template("atualizar_cliente.html")
     
   except Exception as e:
     print(e)

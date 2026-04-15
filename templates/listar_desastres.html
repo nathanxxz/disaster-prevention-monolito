@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Análises de Desastres{% endblock %}
+{% block content %}
+<div class="flex-between mb-2">
+  <h1>📊 Análises de Desastres</h1>
+  {% if current_user.is_admin %}
+    <a href="{{ url_for('desastres.criar_desastre') }}" class="btn btn-success">➕ Nova Análise</a>
+  {% endif %}
+</div>
+
+{% if desastres %}
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cidade</th>
+          <th>UF</th>
+          <th>Chuva/dia</th>
+          <th>Acum. 3d</th>
+          <th>Acum. 7d</th>
+          <th>Risco</th>
+          <th>Prob.</th>
+          <th>Data</th>
+          {% if current_user.is_admin %}<th>Ações</th>{% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in desastres %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.cidade }}</td>
+          <td>{{ d.estado }}</td>
+          <td>{{ d.chuva_dia }} mm</td>
+          <td>{{ d.acumulado_3d }} mm</td>
+          <td>{{ d.acumulado_7d }} mm</td>
+          <td>
+            {% if d.risco_nivel == 'Crítico' %}
+              <span class="badge badge-danger">{{ d.risco_nivel }}</span>
+            {% elif d.risco_nivel == 'Alto' %}
+              <span class="badge badge-warning">{{ d.risco_nivel }}</span>
+            {% elif d.risco_nivel == 'Moderado' %}
+              <span class="badge badge-info">{{ d.risco_nivel }}</span>
+            {% else %}
+              <span class="badge badge-success">{{ d.risco_nivel }}</span>
+            {% endif %}
+          </td>
+          <td>{{ d.risco_probabilidade }}%</td>
+          <td>{{ d.data_analise }}</td>
+          {% if current_user.is_admin %}
+          <td>
+            <a href="{{ url_for('desastres.atualizar_desastre', id=d.id) }}" class="btn btn-primary btn-sm">Editar</a>
+            <form method="POST" action="{{ url_for('desastres.excluir_desastre', id=d.id) }}" style="display:inline;" data-confirm="Excluir esta análise?">
+              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            </form>
+          </td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="card text-center">
+  <p class="text-muted">Nenhuma análise cadastrada ainda.</p>
+  {% if current_user.is_admin %}
+    <a href="{{ url_for('desastres.criar_desastre') }}" class="btn btn-primary mt-1">Criar primeira análise</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

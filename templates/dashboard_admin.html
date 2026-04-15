@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Admin{% endblock %}
+{% block content %}
+<h1 style="margin-bottom:1.5rem;">👋 Olá, {{ current_user.nome }}</h1>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-value">📊</div>
+    <div class="stat-label">Análises de Desastres</div>
+    <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-primary btn-sm mt-1">Ver todas</a>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">➕</div>
+    <div class="stat-label">Nova Análise</div>
+    <a href="{{ url_for('desastres.criar_desastre') }}" class="btn btn-success btn-sm mt-1">Criar</a>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">👤</div>
+    <div class="stat-label">Administradores</div>
+    <a href="{{ url_for('admin.listar_admins') }}" class="btn btn-primary btn-sm mt-1">Gerenciar</a>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">👥</div>
+    <div class="stat-label">Clientes</div>
+    <a href="{{ url_for('cliente.listar_clientes') }}" class="btn btn-primary btn-sm mt-1">Gerenciar</a>
+  </div>
+</div>
+{% endblock %}

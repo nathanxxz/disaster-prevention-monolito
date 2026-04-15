@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Detalhes da Análise{% endblock %}
+{% block content %}
+{% if desastre %}
+<div class="card" style="max-width:600px;margin:2rem auto;">
+  <div class="card-header">📋 Detalhes da Análise #{{ desastre.id }}</div>
+  <p><strong>Cidade:</strong> {{ desastre.cidade }} - {{ desastre.estado }}</p>
+  <p><strong>Chuva do dia:</strong> {{ desastre.chuva_dia }} mm</p>
+  <p><strong>Acumulado 3 dias:</strong> {{ desastre.acumulado_3d }} mm</p>
+  <p><strong>Acumulado 7 dias:</strong> {{ desastre.acumulado_7d }} mm</p>
+  <p><strong>Nível de risco:</strong> {{ desastre.risco_nivel }}</p>
+  <p><strong>Probabilidade:</strong> {{ desastre.risco_probabilidade }}%</p>
+  <p><strong>Data da análise:</strong> {{ desastre.data_analise }}</p>
+  <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-outline mt-2">← Voltar</a>
+</div>
+{% else %}
+<div class="card text-center">
+  <p class="text-muted">{{ error or 'Análise não encontrada.' }}</p>
+  <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-outline mt-1">← Voltar</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -22,6 +22,20 @@ app.register_blueprint(bp_admin)
 app.register_blueprint(bp_cliente)
 app.register_blueprint(bp_disaster)
 
+@app.route("/")
+def home():
+    return render_template('index.html')
+
+
+@app.route("/login")
+def login_page():
+    return render_template('login.html')
+
+
+@app.route("/cadastro")
+def cadastro_page():
+    return render_template('cadastro.html')
+
 
 if __name__ == "__main__":
     with app.app_context():

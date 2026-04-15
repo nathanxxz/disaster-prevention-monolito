@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Administradores{% endblock %}
+{% block content %}
+<div class="flex-between mb-2">
+  <h1>👤 Administradores</h1>
+</div>
+{% if admins %}
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-responsive">
+    <table>
+      <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Ações</th></tr></thead>
+      <tbody>
+        {% for a in admins %}
+        <tr>
+          <td>{{ a.id }}</td><td>{{ a.nome }}</td><td>{{ a.email }}</td>
+          <td>
+            <a href="{{ url_for('admin.atualizar_admin', id=a.id) }}" class="btn btn-primary btn-sm">Editar</a>
+            <form method="POST" action="{{ url_for('admin.excluir_admin', id=a.id) }}" style="display:inline;" data-confirm="Excluir este admin?">
+              <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="card text-center"><p class="text-muted">Nenhum administrador cadastrado.</p></div>
+{% endif %}
+{% endblock %}

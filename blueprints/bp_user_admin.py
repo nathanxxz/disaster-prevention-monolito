@@ -8,13 +8,13 @@ adminDAO = UsuarioAdministradorDao()
 
 bp_admin = Blueprint("admin",__name__,url_prefix="/admin")
 
-bp_admin.route("/login/admin", methods=["POST"])
+@bp_admin.route("/login/admin", methods=["POST"])
 def loginUsuarioAdmin():
   try:
 
     if(request.method == "POST"):
       adminDAO.loginUsuarioAdmin()
-      return render_template("loginAdmin.html")
+      return render_template("login_admin.html")
     
   except Exception as e:
     print(e)
@@ -26,7 +26,7 @@ def logoutUsuarioAdmin():
 
     if(request.method == "POST"):
       adminDAO.logoutAdmin()
-      return render_template("loginAdmin.html")
+      return render_template("login_admin.html")
     
   except Exception as e:
     print(e)
@@ -39,7 +39,7 @@ def criarUsuarioAdmin():
        
      if(request.method == "POST"):
       adminDAO.criarUsuarioAdmin()
-      return render_template("cadastroAdmin.html")
+      return render_template("cadastro_admin.html")
     
     except Exception as e:
       print(e)
@@ -51,7 +51,7 @@ def buscarUsuarioAdminPorID(id):
 
     if(request.method == "GET"):
       adminDAO.buscarUsuarioAdminPorID(id)
-      return render_template("buscarAdmin.html")
+      return render_template("buscar_admin.html")
     
   except Exception as e:
     print(e)
@@ -63,7 +63,7 @@ def listarAdmins():
 
     if(request.method == "GET"):
       adminDAO.listarTodosUsuariosAdmin()
-      return render_template("listarAdmin.html")
+      return render_template("listar_admin.html")
     
   except Exception as e:
     print(e)
@@ -75,7 +75,7 @@ def excluirUsuarioAdmin(id):
 
     if(request.method == "POST"):
       adminDAO.excluirUsuarioAdmin(id)
-      return render_template("excluirAdmin.html")
+      return render_template("excluir_admin.html")
     
   except Exception as e:
     print(e)
@@ -87,7 +87,7 @@ def atualizarAdmin(id):
 
     if(request.method == "POST"):
       adminDAO.atualizarUsuarioAdmin(id)
-      return render_template("atualizarAdmin.html")
+      return render_template("atualizar_admin.html")
     
   except Exception as e:
     print(e)
