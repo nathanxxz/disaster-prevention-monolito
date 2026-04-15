@@ -3,3 +3,4 @@
  flask-login
  flask-cors
  werkzeug
+ psycopg2-binary

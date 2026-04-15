@@ -12,7 +12,7 @@ bp_admin = Blueprint("admin",__name__,url_prefix="/admin")
 def loginUsuarioAdmin():
   try:
 
-    if(request.method == "POST"):
+    if(request.method == "POST" or request.method == "GET"):
       adminDAO.loginUsuarioAdmin()
       return render_template("dashboard_admin.html")
     
@@ -39,7 +39,7 @@ def logoutUsuarioAdmin():
 def criarUsuarioAdmin():
     try:
        
-     if(request.method == "POST"):
+     if(request.method == "POST" or request.method == "GET"):
        adminDAO.criarUsuarioAdmin()
        return redirect(url_for("admin.loginUsuarioAdmin"))
 
@@ -67,7 +67,7 @@ def listarAdmins():
 
     if(request.method == "GET"):
       adminDAO.listarTodosUsuariosAdmin()
-      return render_template("listar_admin.html")
+      return render_template("listar_admins.html")
     
   except Exception as e:
     print(e)

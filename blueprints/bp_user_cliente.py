@@ -15,7 +15,7 @@ bp_cliente = Blueprint("cliente",__name__,url_prefix="/cliente")
 def loginUsuarioCliente():
   try:
 
-    if(request.method == "POST" or "GET"):
+    if(request.method == "POST" or request.method == "GET"):
       clienteDAO.loginUsuarioCliente()
       return render_template("login_cliente.html")
     
@@ -27,7 +27,7 @@ def loginUsuarioCliente():
 def logoutUsuarioCliente():
   try:
 
-    if(request.method == "POST" or "GET"):
+    if(request.method == "POST" or request.method == "GET"):
       clienteDAO.logoutCliente()
       return render_template("login_cliente.html")
     
@@ -39,7 +39,7 @@ def logoutUsuarioCliente():
 def criarUsuarioCliente():
     try:
        
-     if(request.method == "POST" or "GET"):
+     if(request.method == "POST" or request.method == "GET"):
       clienteDAO.criarUsuarioCliente()
       return render_template("cadastro_cliente.html")
     
@@ -67,7 +67,7 @@ def listarClientes():
 
     if(request.method == "GET"):
       clienteDAO.listarTodosUsuariosClientes()
-      return render_template("listar_cliente.html")
+      return render_template("listar_clientes.html")
     
   except Exception as e:
     print(e)

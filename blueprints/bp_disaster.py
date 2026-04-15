@@ -10,12 +10,12 @@ desastreDAO = DisasterDao()
 
 bp_disaster = Blueprint("desastres",__name__, url_prefix="/desastres")
 
-@bp_disaster.route("/criar", methods=["POST"])
+@bp_disaster.route("/criar", methods=["POST", "GET"])
 @login_required
 def criarDesastre():
     try:
 
-        if(request.method == "POST"):
+        if(request.method == "POST" or request.method == "GET"):
             desastreDAO.criarDesastre()
             return render_template("criar_desastre.html")
         
