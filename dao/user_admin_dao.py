@@ -21,7 +21,7 @@ class UsuarioAdministradorDao:
         print(e)
         return {"message": "Erro ao criar usuario"},500
      
-  def loginUsuarioCliente(self):
+  def loginUsuarioAdmin(self):
      try:
 
        data = request.form
@@ -37,7 +37,7 @@ class UsuarioAdministradorDao:
           return {"message": "Erro ao fazer login"},500
 
 
-  def logoutCliente(self):
+  def logoutAdmin(self):
      if(logout_user()):
          return {"message": "Saindo do sistema"},200
      

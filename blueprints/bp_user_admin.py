@@ -8,6 +8,30 @@ adminDAO = UsuarioAdministradorDao()
 
 bp_admin = Blueprint("admin",__name__,url_prefix="/admin")
 
+bp_admin.route("/login/admin", methods=["POST"])
+def loginUsuarioAdmin():
+  try:
+
+    if(request.method == "POST"):
+      adminDAO.loginUsuarioAdmin()
+      return render_template("loginAdmin.html")
+    
+  except Exception as e:
+    print(e)
+
+@bp_admin.route("/logout",methods=["POST"])
+@login_required
+def logoutUsuarioAdmin():
+  try:
+
+    if(request.method == "POST"):
+      adminDAO.logoutAdmin()
+      return render_template("loginAdmin.html")
+    
+  except Exception as e:
+    print(e)
+
+
 
 @bp_admin.route("/cadastrar", methods=["POST"])
 def criarUsuarioAdmin():
@@ -21,7 +45,7 @@ def criarUsuarioAdmin():
       print(e)
 
 @bp_admin.route("/buscar/<int:id>", methods=["GET"])
-@login_required()
+@login_required
 def buscarUsuarioAdminPorID(id):
   try:
 
@@ -33,7 +57,7 @@ def buscarUsuarioAdminPorID(id):
     print(e)
 
 @bp_admin.route("/listar", methods=["GET"])
-@login_required()
+@login_required
 def listarAdmins():
   try:
 
@@ -45,7 +69,7 @@ def listarAdmins():
     print(e)
 
 @bp_admin.route("/excluir/<int:id>",methods=["POST"])
-@login_required()
+@login_required
 def excluirUsuarioAdmin(id):
   try:
 
@@ -57,7 +81,7 @@ def excluirUsuarioAdmin(id):
     print(e)
    
 @bp_admin.route("/atualizar/<int:id>", methods=["POST"])
-@login_required()
+@login_required
 def atualizarAdmin(id):
   try:
 

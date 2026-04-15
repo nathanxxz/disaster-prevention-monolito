@@ -1,6 +1,7 @@
 from flask import Blueprint,request,render_template,redirect,url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from extension import db
+from decorators import admin_required
 
 from dao.user_cliente_dao import UsuarioClienteDao
 
@@ -22,7 +23,7 @@ def loginUsuarioCliente():
     print(e)
 
 @bp_cliente.route("/logout",methods=["POST"])
-@login_required()
+@login_required
 def logoutUsuarioCliente():
   try:
 
@@ -46,7 +47,8 @@ def criarUsuarioCliente():
       print(e)
 
 @bp_cliente.route("/buscar/<int:id>", methods=["GET"])
-@login_required()
+@login_required
+@admin_required
 def buscarUsuarioClientePorID(id):
   try:
 
@@ -58,7 +60,8 @@ def buscarUsuarioClientePorID(id):
     print(e)
 
 @bp_cliente.route("/listar", methods=["GET"])
-@login_required()
+@login_required
+@admin_required
 def listarClientes():
   try:
 
@@ -70,7 +73,7 @@ def listarClientes():
     print(e)
 
 @bp_cliente.route("/excluir/<int:id>",methods=["POST"])
-@login_required()
+@login_required
 def excluirUsuarioCliente(id):
   try:
 
@@ -82,7 +85,7 @@ def excluirUsuarioCliente(id):
     print(e)
    
 @bp_cliente.route("/atualizar/<int:id>", methods=["POST"])
-@login_required()
+@login_required
 def atualizarCliente(id):
   try:
 
