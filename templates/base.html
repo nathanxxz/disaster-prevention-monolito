@@ -13,11 +13,11 @@
     <a class="navbar-brand" href="{{ url_for('home') }}">🛡️ Disaster Prevention</a>
     <ul class="navbar-nav">
       {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('desastres.listar_desastres') }}">📊 Análises</a></li>
+        <li><a href="{{ url_for('desastres.listarDesastres') }}">📊 Análises</a></li>
         {% if current_user.is_admin %}
-          <li><a href="{{ url_for('desastres.criar_desastre') }}">➕ Nova Análise</a></li>
-          <li><a href="{{ url_for('admin.listar_admins') }}">👤 Admins</a></li>
-          <li><a href="{{ url_for('cliente.listar_clientes') }}">👥 Clientes</a></li>
+          <li><a href="{{ url_for('desastres.criarDesastre') }}">➕ Nova Análise</a></li>
+          <li><a href="{{ url_for('admin.listarAdmins') }}">👤 Admins</a></li>
+          <li><a href="{{ url_for('cliente.listarClientes') }}">👥 Clientes</a></li>
         {% endif %}
         <li>
           <form action="{% if current_user.is_admin %}{{ url_for('admin.logout_admin') }}{% else %}{{ url_for('cliente.logout_cliente') }}{% endif %}" method="POST" style="display:inline">
@@ -25,8 +25,8 @@
           </form>
         </li>
       {% else %}
-        <li><a href="{{ url_for('admin.login_admin') }}">Admin Login</a></li>
-        <li><a href="{{ url_for('cliente.login_cliente') }}">Cliente Login</a></li>
+        <li><a href="{{ url_for('admin.loginUsuarioAdmin') }}">Admin Login</a></li>
+        <li><a href="{{ url_for('cliente.loginUsuarioCliente') }}">Cliente Login</a></li>
       {% endif %}
     </ul>
   </nav>

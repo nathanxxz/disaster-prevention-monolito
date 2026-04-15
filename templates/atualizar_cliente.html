@@ -4,7 +4,7 @@
 {% if cliente %}
 <div class="card" style="max-width:500px;margin:2rem auto;">
   <div class="card-header">✏️ Editar Perfil</div>
-  <form method="POST" action="{{ url_for('cliente.atualizar_cliente', id=cliente.id) }}">
+  <form method="POST" action="{{ url_for('cliente.atualizarCliente', id=cliente.id) }}">
     <div class="form-group">
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" class="form-control" value="{{ cliente.nome }}" required>

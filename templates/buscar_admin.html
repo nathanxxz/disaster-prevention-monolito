@@ -6,7 +6,7 @@
   <div class="card-header">👤 Admin #{{ admin.id }}</div>
   <p><strong>Nome:</strong> {{ admin.nome }}</p>
   <p><strong>Email:</strong> {{ admin.email }}</p>
-  <a href="{{ url_for('admin.listar_admins') }}" class="btn btn-outline mt-2">← Voltar</a>
+  <a href="{{ url_for('admin.listarAdmins') }}" class="btn btn-outline mt-2">← Voltar</a>
 </div>
 {% else %}
 <div class="card text-center"><p class="text-muted">{{ error or 'Admin não encontrado.' }}</p></div>

@@ -6,7 +6,7 @@
   <div class="card-header">👤 Cliente #{{ cliente.id }}</div>
   <p><strong>Nome:</strong> {{ cliente.nome }}</p>
   <p><strong>Email:</strong> {{ cliente.email }}</p>
-  <a href="{{ url_for('cliente.listar_clientes') }}" class="btn btn-outline mt-2">← Voltar</a>
+  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline mt-2">← Voltar</a>
 </div>
 {% else %}
 <div class="card text-center"><p class="text-muted">{{ error or 'Cliente não encontrado.' }}</p></div>

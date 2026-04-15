@@ -8,13 +8,15 @@ adminDAO = UsuarioAdministradorDao()
 
 bp_admin = Blueprint("admin",__name__,url_prefix="/admin")
 
-@bp_admin.route("/login/admin", methods=["POST"])
+@bp_admin.route("/login/admin", methods=["POST","GET"])
 def loginUsuarioAdmin():
   try:
 
     if(request.method == "POST"):
       adminDAO.loginUsuarioAdmin()
-      return render_template("login_admin.html")
+      return render_template("dashboard_admin.html")
+    
+    return render_template("login_admin.html")
     
   except Exception as e:
     print(e)
@@ -33,13 +35,15 @@ def logoutUsuarioAdmin():
 
 
 
-@bp_admin.route("/cadastrar", methods=["POST"])
+@bp_admin.route("/cadastrar", methods=["POST", "GET"])
 def criarUsuarioAdmin():
     try:
        
      if(request.method == "POST"):
-      adminDAO.criarUsuarioAdmin()
-      return render_template("cadastro_admin.html")
+       adminDAO.criarUsuarioAdmin()
+       return redirect(url_for("admin.loginUsuarioAdmin"))
+
+     return render_template("cadastro_admin.html")
     
     except Exception as e:
       print(e)

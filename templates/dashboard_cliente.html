@@ -7,7 +7,7 @@
   <div class="stat-card">
     <div class="stat-value">📊</div>
     <div class="stat-label">Análises de Desastres</div>
-    <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-primary btn-sm mt-1">Ver análises</a>
+    <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-primary btn-sm mt-1">Ver análises</a>
   </div>
 </div>
 
@@ -15,6 +15,6 @@
   <div class="card-header">Informações do perfil</div>
   <p><strong>Nome:</strong> {{ current_user.nome }}</p>
   <p><strong>Email:</strong> {{ current_user.email }}</p>
-  <a href="{{ url_for('cliente.atualizar_cliente', id=current_user.id) }}" class="btn btn-outline btn-sm mt-1">Editar perfil</a>
+  <a href="{{ url_for('cliente.atualizarCliente', id=current_user.id) }}" class="btn btn-outline btn-sm mt-1">Editar perfil</a>
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card" style="max-width:500px;margin:2rem auto;">
   <div class="card-header">📝 Cadastro Cliente</div>
-  <form method="POST" action="{{ url_for('cliente.cadastrar_cliente') }}">
+  <form method="POST" action="{{ url_for('cliente.criarUsuarioCliente') }}">
     <div class="form-group">
       <label for="nome">Nome completo</label>
       <input type="text" id="nome" name="nome" class="form-control" required maxlength="45">
@@ -22,6 +22,6 @@
     </div>
     <button type="submit" class="btn btn-primary" style="width:100%;">Cadastrar</button>
   </form>
-  <p class="text-center mt-2 text-muted">Já tem conta? <a href="{{ url_for('cliente.login_cliente') }}">Faça login</a></p>
+  <p class="text-center mt-2 text-muted">Já tem conta? <a href="{{ url_for('cliente.loginUsuarioCliente') }}">Faça login</a></p>
 </div>
 {% endblock %}

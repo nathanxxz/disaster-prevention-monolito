@@ -5,9 +5,9 @@
   <h1>🛡️ Disaster Prevention</h1>
   <p>Sistema de prevenção e análise de desastres naturais. Monitore riscos de enchentes e deslizamentos com base em dados pluviométricos.</p>
   <div class="hero-actions">
-    <a href="{{ url_for('admin.login_admin') }}" class="btn btn-primary">Login Admin</a>
-    <a href="{{ url_for('cliente.login_cliente') }}" class="btn btn-outline">Login Cliente</a>
+    <a href="{{ url_for('admin.loginUsuarioAdmin') }}" class="btn btn-primary">Login Admin</a>
+    <a href="{{ url_for('cliente.loginUsuarioCliente') }}" class="btn btn-outline">Login Cliente</a>
   </div>
-  <p class="mt-2 text-muted">Não tem conta? <a href="{{ url_for('admin.cadastrar_admin') }}">Cadastre-se como Admin</a> ou <a href="{{ url_for('cliente.cadastrar_cliente') }}">como Cliente</a></p>
+  <p class="mt-2 text-muted">Não tem conta? <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastre-se como Admin</a> ou <a href="{{ url_for('cliente.criarUsuarioCliente') }}">como Cliente</a></p>
 </div>
 {% endblock %}

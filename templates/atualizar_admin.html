@@ -4,7 +4,7 @@
 {% if admin %}
 <div class="card" style="max-width:500px;margin:2rem auto;">
   <div class="card-header">✏️ Editar Admin #{{ admin.id }}</div>
-  <form method="POST" action="{{ url_for('admin.atualizar_admin', id=admin.id) }}">
+  <form method="POST" action="{{ url_for('admin.atualizarAdmin', id=admin.id) }}">
     <div class="form-group">
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" class="form-control" value="{{ admin.nome }}" required>

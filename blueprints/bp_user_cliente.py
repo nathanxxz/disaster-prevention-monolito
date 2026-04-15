@@ -11,23 +11,23 @@ clienteDAO = UsuarioClienteDao()
 bp_cliente = Blueprint("cliente",__name__,url_prefix="/cliente")
 
 
-@bp_cliente.route("/login/cliente", methods=["POST"])
+@bp_cliente.route("/login/cliente", methods=["POST","GET"])
 def loginUsuarioCliente():
   try:
 
-    if(request.method == "POST"):
+    if(request.method == "POST" or "GET"):
       clienteDAO.loginUsuarioCliente()
       return render_template("login_cliente.html")
     
   except Exception as e:
     print(e)
 
-@bp_cliente.route("/logout",methods=["POST"])
+@bp_cliente.route("/logout",methods=["POST", "GET"])
 @login_required
 def logoutUsuarioCliente():
   try:
 
-    if(request.method == "POST"):
+    if(request.method == "POST" or "GET"):
       clienteDAO.logoutCliente()
       return render_template("login_cliente.html")
     
@@ -35,11 +35,11 @@ def logoutUsuarioCliente():
     print(e)
 
 
-@bp_cliente.route("/cadastrar", methods=["POST"])
+@bp_cliente.route("/cadastrar", methods=["POST", "GET"])
 def criarUsuarioCliente():
     try:
        
-     if(request.method == "POST"):
+     if(request.method == "POST" or "GET"):
       clienteDAO.criarUsuarioCliente()
       return render_template("cadastro_cliente.html")
     

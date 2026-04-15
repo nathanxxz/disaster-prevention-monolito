@@ -14,7 +14,7 @@
         <tr>
           <td>{{ c.id }}</td><td>{{ c.nome }}</td><td>{{ c.email }}</td>
           <td>
-            <a href="{{ url_for('cliente.atualizar_cliente', id=c.id) }}" class="btn btn-primary btn-sm">Editar</a>
+            <a href="{{ url_for('cliente.atualizarCliente', id=c.id) }}" class="btn btn-primary btn-sm">Editar</a>
             <form method="POST" action="{{ url_for('cliente.excluir_cliente', id=c.id) }}" style="display:inline;" data-confirm="Excluir este cliente?">
               <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
             </form>

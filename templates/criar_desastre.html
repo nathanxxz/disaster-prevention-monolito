@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card" style="max-width:600px;margin:2rem auto;">
   <div class="card-header">➕ Nova Análise de Desastre</div>
-  <form method="POST" action="{{ url_for('desastres.criar_desastre') }}">
+  <form method="POST" action="{{ url_for('desastres.criarDesastre') }}">
     <div class="form-group">
       <label for="cidade">Cidade</label>
       <input type="text" id="cidade" name="cidade" class="form-control" required maxlength="45">

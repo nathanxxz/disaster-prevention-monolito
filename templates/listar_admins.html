@@ -14,8 +14,8 @@
         <tr>
           <td>{{ a.id }}</td><td>{{ a.nome }}</td><td>{{ a.email }}</td>
           <td>
-            <a href="{{ url_for('admin.atualizar_admin', id=a.id) }}" class="btn btn-primary btn-sm">Editar</a>
-            <form method="POST" action="{{ url_for('admin.excluir_admin', id=a.id) }}" style="display:inline;" data-confirm="Excluir este admin?">
+            <a href="{{ url_for('admin.atualizarAdmin', id=a.id) }}" class="btn btn-primary btn-sm">Editar</a>
+            <form method="POST" action="{{ url_for('admin.excluirUsuarioAdmin', id=a.id) }}" style="display:inline;" data-confirm="Excluir este admin?">
               <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
             </form>
           </td>

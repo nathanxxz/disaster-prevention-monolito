@@ -11,12 +11,12 @@
   <p><strong>Nível de risco:</strong> {{ desastre.risco_nivel }}</p>
   <p><strong>Probabilidade:</strong> {{ desastre.risco_probabilidade }}%</p>
   <p><strong>Data da análise:</strong> {{ desastre.data_analise }}</p>
-  <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-outline mt-2">← Voltar</a>
+  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline mt-2">← Voltar</a>
 </div>
 {% else %}
 <div class="card text-center">
   <p class="text-muted">{{ error or 'Análise não encontrada.' }}</p>
-  <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-outline mt-1">← Voltar</a>
+  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline mt-1">← Voltar</a>
 </div>
 {% endif %}
 {% endblock %}

@@ -4,7 +4,7 @@
 {% if desastre %}
 <div class="card" style="max-width:600px;margin:2rem auto;">
   <div class="card-header">✏️ Editar Análise #{{ desastre.id }}</div>
-  <form method="POST" action="{{ url_for('desastres.atualizar_desastre', id=desastre.id) }}">
+  <form method="POST" action="{{ url_for('desastres.atualizarDesastre', id=desastre.id) }}">
     <div class="form-group">
       <label for="cidade">Cidade</label>
       <input type="text" id="cidade" name="cidade" class="form-control" value="{{ desastre.cidade }}" required>
@@ -40,7 +40,7 @@
     </div>
     <button type="submit" class="btn btn-primary" style="width:100%;">Salvar Alterações</button>
   </form>
-  <a href="{{ url_for('desastres.listar_desastres') }}" class="btn btn-outline mt-1" style="width:100%;text-align:center;">Cancelar</a>
+  <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline mt-1" style="width:100%;text-align:center;">Cancelar</a>
 </div>
 {% else %}
 <div class="card text-center">
