@@ -16,8 +16,8 @@ def criarDesastre():
     try:
 
         if(request.method == "POST" or request.method == "GET"):
-            desastreDAO.criarDesastre()
-            return render_template("criar_desastre.html")
+            criar = desastreDAO.criarDesastre()
+            return render_template("criar_desastre.html", desastres=criar)
         
     except Exception as e:
         print(e)
@@ -28,8 +28,8 @@ def buscarDesastrePorID(id):
     try:
 
         if(request.method == "GET"):
-            desastreDAO.buscarDesastrePorID(id)
-            return render_template("buscar_desastre.html")
+            buscar = desastreDAO.buscarDesastrePorID(id)
+            return render_template("buscar_desastre.html",desastres=buscar)
         
     except Exception as e:
         print(e)
@@ -40,8 +40,8 @@ def buscarDesastrePorID(id):
 def listarDesastres():
     try:
         if(request.method == "GET"):
-            desastreDAO.listarTodosDesastres()
-            return render_template("listar_desastres.html")
+           listar = desastreDAO.listarTodosDesastres()
+           return render_template("listar_desastres.html", desastres= listar)
         
     except Exception as e:
         print(e)
@@ -53,8 +53,8 @@ def excluirDesastre(id):
     try:
 
         if(request.method == "POST"):
-            desastreDAO.excluirDesastre(id)
-            return render_template("excluir_desastre.html")
+            excluir = desastreDAO.excluirDesastre(id)
+            return render_template("excluir_desastre.html", desastres=excluir)
         
     except Exception as e:
         print(e)
@@ -65,8 +65,8 @@ def excluirDesastre(id):
 def atualizarDesastre(id):
     try:
         if(request.method == "POST"):
-            desastreDAO.atualizarDesastre(id)
-            return render_template("atualizar_desastre.html")
+            atualizar = desastreDAO.atualizarDesastre(id)
+            return render_template("atualizar_desastre.html", desastres=atualizar)
         
     except Exception as e:
         print(e)

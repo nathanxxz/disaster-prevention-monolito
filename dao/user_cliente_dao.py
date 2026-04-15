@@ -10,8 +10,8 @@ class UsuarioClienteDao:
   def criarUsuarioCliente(self):
      try:
         data = request.form
-        if("nome" in data and "data_nascimento" in data and "email" in data and "senha" in data and " cod_desastre" in data  and "data_criacao_conta" in data):
-            usuario = UsuarioCliente(nome=data["nome"], data_nascimento=datetime.strptime(data["data_nascimento"], "%Y-%m-%d").date(), email=data["email"], senha=data["senha"], cod_desastre=data["cod_desastre"], data_criacao_conta=datetime.strptime(data["data_criacao_conta"], "%Y-%m-%d").date())
+        if("nome" in data and "data_nascimento" in data and "email" in data and "senha" in data and  "data_criacao_conta" in data):
+            usuario = UsuarioCliente(nome=data["nome"], data_nascimento=datetime.strptime(data["data_nascimento"], "%Y-%m-%d").date(), email=data["email"], senha=data["senha"],  data_criacao_conta=datetime.strptime(data["data_criacao_conta"], "%Y-%m-%d").date())
             db.session.add(usuario)
             db.session.commit()
             return {"message": "Usuario criado com sucesso"},201
@@ -39,7 +39,7 @@ class UsuarioClienteDao:
 
 
   def logoutCliente(self):
-     if(logout_user()):
+         logout_user()
          return {"message": "Saindo do sistema"},200
      
 
@@ -121,6 +121,6 @@ class UsuarioClienteDao:
        except Exception as e:
            db.session.rollback()
            print(e)
-           return {"message": "Erro ao atualizar usuario"}
+           return {"message": "Erro ao atualizar usuario"},500
        
       
