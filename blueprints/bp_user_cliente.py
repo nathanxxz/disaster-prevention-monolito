@@ -16,8 +16,11 @@ def loginUsuarioCliente():
   try:
 
     if(request.method == "POST" or request.method == "GET"):
-      clienteDAO.loginUsuarioCliente()
-      return render_template("login_cliente.html")
+       sucesso = clienteDAO.loginUsuarioCliente()
+       if(sucesso):
+          return redirect(url_for("cliente.dashboardCliente"))
+       return render_template("login_cliente.html")
+    return render_template("login_cliente.html")
     
   except Exception as e:
     print(e)
@@ -26,11 +29,10 @@ def loginUsuarioCliente():
 @login_required
 def logoutUsuarioCliente():
   try:
-
-    if(request.method == "POST" or request.method == "GET"):
-      clienteDAO.logoutCliente()
-      return render_template("login_cliente.html")
-    
+     
+     clienteDAO.logoutCliente()
+     return redirect(url_for("cliente.loginUsuarioCliente"))
+  
   except Exception as e:
     print(e)
 
@@ -40,8 +42,11 @@ def criarUsuarioCliente():
     try:
        
      if(request.method == "POST" or request.method == "GET"):
-      clienteDAO.criarUsuarioCliente()
-      return render_template("cadastro_cliente.html")
+        sucesso = clienteDAO.criarUsuarioCliente()
+        if(sucesso):
+          return redirect(url_for("cliente.dashboardCliente"))
+        return render_template("login_cliente.html", erro="E-mail ou senha inválidos.")
+     return render_template("cadastro_cliente.html")
     
     except Exception as e:
       print(e)

@@ -13,8 +13,10 @@ def loginUsuarioAdmin():
   try:
 
     if(request.method == "POST" or request.method == "GET"):
-      adminDAO.loginUsuarioAdmin()
-      return render_template("dashboard_admin.html")
+       sucesso = adminDAO.loginUsuarioAdmin()
+       if(sucesso):
+          return redirect(url_for("admin.dashboardAdmin"))
+       return render_template("login_admin.html")
     
     return render_template("login_admin.html")
     
@@ -26,9 +28,8 @@ def loginUsuarioAdmin():
 def logoutUsuarioAdmin():
   try:
 
-    if(request.method == "POST"):
-      adminDAO.logoutAdmin()
-      return render_template("login_admin.html")
+     adminDAO.logoutAdmin()
+     return redirect(url_for("admin.loginUsuarioAdmin"))
     
   except Exception as e:
     print(e)
