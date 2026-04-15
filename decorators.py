@@ -1,0 +1,17 @@
+from functools import wraps
+from flask import abort,redirect,url_for
+from flask_login import current_user, logout_user
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_fuction(*args, **kwargs):
+        if(not current_user.is_authenticated):
+            return redirect(url_for("home_page"))
+        
+        if(not current_user.is_admin):
+            logout_user()
+            return redirect(url_for("home_page"))
+        
+        return f(*args, **kwargs)
+    
+    return decorated_fuction
