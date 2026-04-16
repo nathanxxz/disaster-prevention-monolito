@@ -1,29 +1,66 @@
 {% extends "base.html" %}
 {% block title %}Login Admin{% endblock %}
 {% block content %}
-<div class="auth-wrap">
-  <div class="auth-card">
-    <div class="auth-logo">🔐</div>
-    <h1 class="auth-title">Área Administrativa</h1>
-    <p class="auth-subtitle">Faça login com suas credenciais de administrador</p>
+<div class="auth-outer">
 
-    <form method="POST" action="{{ url_for('admin.loginUsuarioAdmin') }}">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="admin@email.com" required autofocus>
-      </div>
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" class="form-control" placeholder="••••••••" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block mt-2">Entrar no sistema</button>
-    </form>
+  <!-- Painel esquerdo — brand -->
+  <div class="auth-brand-panel">
+    <div class="auth-brand-logo">
+      <div class="logo-mark">🛡️</div>
+      DisasterPrev
+    </div>
 
-    <p class="auth-footer">
-      Não tem conta? <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastre-se</a>
-      &nbsp;·&nbsp;
-      <a href="{{ url_for('cliente.loginUsuarioCliente') }}">Login Cliente</a>
-    </p>
+    <div class="tagline">
+      <h2>Controle total sobre <em>análises de risco</em></h2>
+      <p>Acesse o painel administrativo para gerenciar análises pluviométricas e usuários do sistema.</p>
+    </div>
+
+    <div class="auth-brand-stats">
+      <div class="auth-stat-row">
+        <span class="dot dot-red"></span>
+        Monitoramento de áreas críticas
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-orange"></span>
+        Gestão de usuários e permissões
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-green"></span>
+        Registros históricos de análises
+      </div>
+    </div>
   </div>
+
+  <!-- Painel direito — formulário -->
+  <div class="auth-form-panel">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <div class="auth-badge">🔐 Área Administrativa</div>
+        <h1>Bem-vindo de volta</h1>
+        <p>Faça login com suas credenciais de administrador</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('admin.loginUsuarioAdmin') }}">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="admin@email.com" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Entrar no sistema</button>
+      </form>
+
+      <p class="auth-footer">
+        Não tem conta? <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastre-se</a>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('cliente.loginUsuarioCliente') }}">Login Cliente</a>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('home') }}">← Voltar</a>
+      </p>
+    </div>
+  </div>
+
 </div>
 {% endblock %}

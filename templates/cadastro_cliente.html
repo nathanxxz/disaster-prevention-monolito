@@ -1,35 +1,72 @@
 {% extends "base.html" %}
 {% block title %}Cadastro Cliente{% endblock %}
 {% block content %}
-<div class="auth-wrap">
-  <div class="auth-card" style="max-width:500px;">
-    <div class="auth-logo">👤</div>
-    <h1 class="auth-title">Criar Conta</h1>
-    <p class="auth-subtitle">Preencha os dados para se cadastrar</p>
+<div class="auth-outer">
 
-    <form method="POST" action="{{ url_for('cliente.criarUsuarioCliente') }}">
-      <div class="form-group">
-        <label for="nome">Nome completo</label>
-        <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome" required maxlength="45">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" required maxlength="45">
-        </div>
-        <div class="form-group">
-          <label for="data_nascimento">Nascimento</label>
-          <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
-      </div>
-      <button type="submit" class="btn btn-primary btn-block mt-2">Cadastrar</button>
-    </form>
+  <div class="auth-brand-panel">
+    <div class="auth-brand-logo">
+      <div class="logo-mark">🌧️</div>
+      DisasterPrev
+    </div>
 
-    <p class="auth-footer">Já tem conta? <a href="{{ url_for('cliente.loginUsuarioCliente') }}">Fazer login</a></p>
+    <div class="tagline">
+      <h2>Acesse dados de <em>risco da sua região</em></h2>
+      <p>Crie sua conta para visualizar as análises pluviométricas e alertas de desastres naturais.</p>
+    </div>
+
+    <div class="auth-brand-stats">
+      <div class="auth-stat-row">
+        <span class="dot dot-red"></span>
+        Visualização de análises de risco
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-orange"></span>
+        Histórico de precipitações
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-green"></span>
+        Acesso gratuito às informações
+      </div>
+    </div>
   </div>
+
+  <div class="auth-form-panel">
+    <div class="auth-card" style="max-width: 460px;">
+      <div class="auth-card-header">
+        <div class="auth-badge">📋 Novo Cliente</div>
+        <h1>Criar conta</h1>
+        <p>Preencha seus dados para começar</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('cliente.criarUsuarioCliente') }}">
+        <div class="form-group">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome" required maxlength="45">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="voce@email.com" required maxlength="45">
+          </div>
+          <div class="form-group">
+            <label for="data_nascimento">Nascimento</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Criar conta</button>
+      </form>
+
+      <p class="auth-footer">
+        Já tem conta? <a href="{{ url_for('cliente.loginUsuarioCliente') }}">Fazer login</a>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('home') }}">← Voltar</a>
+      </p>
+    </div>
+  </div>
+
 </div>
 {% endblock %}

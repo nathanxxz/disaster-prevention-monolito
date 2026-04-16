@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 {% block title %}Disaster Prevention — Início{% endblock %}
 {% block content %}
-<div class="hero">
-  <div class="hero-eyebrow">
-    <span>⚡</span> Sistema de Monitoramento Ativo
+<div class="hero-outer">
+  <div class="hero-badge">
+    <span class="live-dot"></span> Sistema de Monitoramento Ativo
   </div>
-  <h1>Prevenção de<br><span>Desastres Naturais</span></h1>
-  <p>Monitore riscos de enchentes e deslizamentos com dados pluviométricos em tempo real. Tome decisões com base em análises precisas.</p>
-  <div class="hero-actions">
-    <a href="{{ url_for('admin.loginUsuarioAdmin') }}" class="btn btn-primary btn-lg">Acessar como Admin</a>
-    <a href="{{ url_for('cliente.loginUsuarioCliente') }}" class="btn btn-outline btn-lg">Acessar como Cliente</a>
+
+  <h1 class="hero-title">
+    Prevenção de<br><span>Desastres Naturais</span>
+  </h1>
+
+  <p class="hero-desc">
+    Monitore riscos de enchentes e deslizamentos com dados pluviométricos em tempo real. Análises precisas para decisões seguras.
+  </p>
+
+  <div class="hero-cta">
+    <a href="{{ url_for('admin.loginUsuarioAdmin') }}" class="btn btn-primary btn-lg">Entrar como Admin</a>
+    <a href="{{ url_for('cliente.loginUsuarioCliente') }}" class="btn btn-outline btn-lg">Entrar como Cliente</a>
   </div>
-  <p class="hero-meta">
-    Não tem conta?
+
+  <p class="hero-links">
+    Não tem conta?&nbsp;
     <a href="{{ url_for('admin.criarUsuarioAdmin') }}">Cadastro Admin</a>
     &nbsp;·&nbsp;
     <a href="{{ url_for('cliente.criarUsuarioCliente') }}">Cadastro Cliente</a>

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
+{% block breadcrumb %}Dashboard{% endblock %}
 {% block content %}
+
 <div class="page-header">
-  <div>
+  <div class="page-header-left">
     <h1>Olá, {{ current_user.nome }} 👋</h1>
-    <p class="subtitle">Visualize as análises de risco disponíveis</p>
+    <p class="subtitle">// visualize as análises de risco disponíveis</p>
   </div>
 </div>
 
@@ -30,7 +32,7 @@
       <span class="detail-label">E-mail</span>
       <span class="detail-value">{{ current_user.email }}</span>
     </div>
-    <div class="detail-row" style="border:none; padding-bottom:0;">
+    <div class="detail-row">
       <span class="detail-label">Ações</span>
       <span class="detail-value">
         <a href="{{ url_for('cliente.atualizarCliente', id=current_user.id) }}" class="btn btn-outline btn-sm">Editar perfil</a>
@@ -38,4 +40,5 @@
     </div>
   </div>
 </div>
+
 {% endblock %}

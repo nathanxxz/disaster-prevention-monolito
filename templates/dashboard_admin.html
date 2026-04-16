@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Dashboard Admin{% endblock %}
+{% block breadcrumb %}Dashboard{% endblock %}
 {% block content %}
+
 <div class="page-header">
-  <div>
+  <div class="page-header-left">
     <h1>Olá, {{ current_user.nome }} 👋</h1>
-    <p class="subtitle">Painel de controle administrativo</p>
+    <p class="subtitle">// painel administrativo</p>
   </div>
 </div>
 
@@ -34,4 +36,27 @@
     <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline btn-sm">Gerenciar →</a>
   </div>
 </div>
+
+<div class="card">
+  <div class="card-title">Informações da conta</div>
+  <div class="detail-row">
+    <span class="detail-label">Nome</span>
+    <span class="detail-value">{{ current_user.nome }}</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">E-mail</span>
+    <span class="detail-value">{{ current_user.email }}</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Perfil</span>
+    <span class="detail-value text-accent">Administrador</span>
+  </div>
+  <div class="detail-row">
+    <span class="detail-label">Ações</span>
+    <span class="detail-value">
+      <a href="{{ url_for('admin.atualizarAdmin', id=current_user.id) }}" class="btn btn-outline btn-sm">Editar perfil</a>
+    </span>
+  </div>
+</div>
+
 {% endblock %}

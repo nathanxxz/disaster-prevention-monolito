@@ -6,37 +6,98 @@
   <title>{% block title %}Disaster Prevention{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
 
-  <nav class="navbar">
-    <a class="navbar-brand" href="{{ url_for('home') }}">
-      <div class="brand-icon">🛡️</div>
-      <span class="brand-text">Disaster Prevention</span>
-    </a>
-    <ul class="navbar-nav">
-      {% if current_user.is_authenticated %}
-        <li><a href="{{ url_for('desastres.listarDesastres') }}">📊 Análises</a></li>
-        {% if current_user.is_admin %}
-          <li><a href="{{ url_for('desastres.criarDesastre') }}">＋ Nova Análise</a></li>
-          <div class="navbar-divider"></div>
-          <li><a href="{{ url_for('admin.listarAdmins') }}">👤 Admins</a></li>
-          <li><a href="{{ url_for('cliente.listarClientes') }}">👥 Clientes</a></li>
-        {% endif %}
-        <div class="navbar-divider"></div>
-        <li>
-          <form action="{% if current_user.is_admin %}{{ url_for('admin.logoutUsuarioAdmin') }}{% else %}{{ url_for('cliente.logoutUsuarioCliente') }}{% endif %}" method="POST" style="display:inline">
-            <button type="submit" class="btn btn-outline btn-sm">Sair</button>
-          </form>
-        </li>
-      {% else %}
-        <li><a href="{{ url_for('admin.loginUsuarioAdmin') }}">Admin</a></li>
-        <li><a href="{{ url_for('cliente.loginUsuarioCliente') }}">Cliente</a></li>
+<body class="{% if current_user.is_authenticated %}app-layout{% else %}public-layout{% endif %}">
+
+{% if current_user.is_authenticated %}
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">🛡️</div>
+      <div>
+        <div class="sidebar-title">DisasterPrev</div>
+        <div class="sidebar-subtitle">Monitoramento</div>
+      </div>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">{{ current_user.nome[0] | upper }}</div>
+      <div>
+        <div class="sidebar-user-name">{{ current_user.nome }}</div>
+        <div class="sidebar-user-role">{% if current_user.is_admin %}Admin{% else %}Cliente{% endif %}</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <div class="nav-section-label">Análises</div>
+      <a href="{{ url_for('desastres.listarDesastres') }}" class="nav-item">
+        <span class="nav-icon">📊</span> Todas as Análises
+      </a>
+      {% if current_user.is_admin %}
+      <a href="{{ url_for('desastres.criarDesastre') }}" class="nav-item">
+        <span class="nav-icon">➕</span> Nova Análise
+      </a>
       {% endif %}
-    </ul>
-  </nav>
+
+      {% if current_user.is_admin %}
+      <div class="nav-section-label">Usuários</div>
+      <a href="{{ url_for('admin.listarAdmins') }}" class="nav-item">
+        <span class="nav-icon">👤</span> Administradores
+      </a>
+      <a href="{{ url_for('cliente.listarClientes') }}" class="nav-item">
+        <span class="nav-icon">👥</span> Clientes
+      </a>
+      {% endif %}
+
+      <div class="nav-section-label">Minha Conta</div>
+      {% if current_user.is_admin %}
+      <a href="{{ url_for('admin.dashboardAdmin') }}" class="nav-item">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      {% else %}
+      <a href="{{ url_for('cliente.dashboardCliente') }}" class="nav-item">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      {% endif %}
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <form action="{% if current_user.is_admin %}{{ url_for('admin.logoutUsuarioAdmin') }}{% else %}{{ url_for('cliente.logoutUsuarioCliente') }}{% endif %}" method="POST">
+        <button type="submit" class="btn-logout">⬅ Sair do sistema</button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- ÁREA PRINCIPAL -->
+  <div class="main-area">
+    <div class="main-topbar">
+      <div class="topbar-breadcrumb">
+        <span>DisasterPrev</span>
+        <span class="sep">/</span>
+        <span class="current">{% block breadcrumb %}Painel{% endblock %}</span>
+      </div>
+      <div class="topbar-right">
+        <div class="status-chip">
+          <span class="dot"></span> Sistema online
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+{% else %}
 
   <div class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -47,8 +108,16 @@
       {% endif %}
     {% endwith %}
 
-    {% block content %}{% endblock %}
-  </div>
+{% endif %}
+
+      {% block content %}{% endblock %}
+
+{% if current_user.is_authenticated %}
+    </div><!-- fim .container -->
+  </div><!-- fim .main-area -->
+{% else %}
+  </div><!-- fim .container -->
+{% endif %}
 
 </body>
 </html>

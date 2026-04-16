@@ -1,29 +1,64 @@
 {% extends "base.html" %}
 {% block title %}Login Cliente{% endblock %}
 {% block content %}
-<div class="auth-wrap">
-  <div class="auth-card">
-    <div class="auth-logo">🌧️</div>
-    <h1 class="auth-title">Acesso ao Sistema</h1>
-    <p class="auth-subtitle">Entre com sua conta para visualizar as análises</p>
+<div class="auth-outer">
 
-    <form method="POST" action="{{ url_for('cliente.loginUsuarioCliente') }}">
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" class="form-control" placeholder="cliente@email.com" required autofocus>
-      </div>
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" class="form-control" placeholder="••••••••" required>
-      </div>
-      <button type="submit" class="btn btn-primary btn-block mt-2">Entrar</button>
-    </form>
+  <div class="auth-brand-panel">
+    <div class="auth-brand-logo">
+      <div class="logo-mark">🌧️</div>
+      DisasterPrev
+    </div>
 
-    <p class="auth-footer">
-      Não tem conta? <a href="{{ url_for('cliente.criarUsuarioCliente') }}">Cadastre-se</a>
-      &nbsp;·&nbsp;
-      <a href="{{ url_for('admin.loginUsuarioAdmin') }}">Login Admin</a>
-    </p>
+    <div class="tagline">
+      <h2>Acesse as <em>análises de risco</em> da sua região</h2>
+      <p>Visualize dados pluviométricos e alertas de desastres naturais com informações atualizadas.</p>
+    </div>
+
+    <div class="auth-brand-stats">
+      <div class="auth-stat-row">
+        <span class="dot dot-red"></span>
+        Alertas de risco em tempo real
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-orange"></span>
+        Dados históricos de precipitação
+      </div>
+      <div class="auth-stat-row">
+        <span class="dot dot-green"></span>
+        Classificação por nível de perigo
+      </div>
+    </div>
   </div>
+
+  <div class="auth-form-panel">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <div class="auth-badge">🌧️ Área do Cliente</div>
+        <h1>Acesse sua conta</h1>
+        <p>Entre para visualizar as análises disponíveis</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('cliente.loginUsuarioCliente') }}">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="cliente@email.com" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Entrar</button>
+      </form>
+
+      <p class="auth-footer">
+        Não tem conta? <a href="{{ url_for('cliente.criarUsuarioCliente') }}">Cadastre-se</a>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('admin.loginUsuarioAdmin') }}">Login Admin</a>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('home') }}">← Voltar</a>
+      </p>
+    </div>
+  </div>
+
 </div>
 {% endblock %}

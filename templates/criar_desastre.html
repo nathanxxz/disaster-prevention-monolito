@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Nova Análise{% endblock %}
+{% block breadcrumb %}Nova Análise{% endblock %}
 {% block content %}
+
 <div class="page-header">
-  <div>
-    <h1>➕ Nova Análise</h1>
-    <p class="subtitle">Registre dados pluviométricos e avaliação de risco</p>
+  <div class="page-header-left">
+    <h1>Nova Análise</h1>
+    <p class="subtitle">// registre dados pluviométricos e avaliação de risco</p>
   </div>
   <a href="{{ url_for('desastres.listarDesastres') }}" class="btn btn-outline">← Voltar</a>
 </div>
@@ -60,7 +62,7 @@
       </div>
       <div class="form-group">
         <label for="risco_probabilidade">Probabilidade (%)</label>
-        <input type="number" step="0.01" min="0" max="100" id="risco_probabilidade" name="risco_probabilidade" class="form-control" placeholder="0 - 100" required>
+        <input type="number" step="0.01" min="0" max="100" id="risco_probabilidade" name="risco_probabilidade" class="form-control" placeholder="0 – 100" required>
       </div>
     </div>
 
@@ -70,4 +72,5 @@
     </div>
   </form>
 </div>
+
 {% endblock %}
