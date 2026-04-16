@@ -14,10 +14,10 @@ bp_disaster = Blueprint("desastres",__name__, url_prefix="/desastres")
 @login_required
 def criarDesastre():
     try:
-
-        if(request.method == "POST" or request.method == "GET"):
-            criar = desastreDAO.criarDesastre()
-            return render_template("criar_desastre.html", desastres=criar)
+          if request.method == "POST":
+            desastreDAO.criarDesastre()
+            return redirect(url_for("desastres.listarDesastres"))
+          return render_template("criar_desastre.html")
         
     except Exception as e:
         print(e)
@@ -36,7 +36,6 @@ def buscarDesastrePorID(id):
 
 @bp_disaster.route("/listar", methods=["GET"])
 @login_required
-@admin_required
 def listarDesastres():
     try:
         if(request.method == "GET"):
@@ -53,20 +52,21 @@ def excluirDesastre(id):
     try:
 
         if(request.method == "POST"):
-            excluir = desastreDAO.excluirDesastre(id)
-            return render_template("excluir_desastre.html", desastres=excluir)
-        
+            desastreDAO.excluirDesastre(id)
+            return redirect(url_for("desastres.listarDesastres"))
+            
     except Exception as e:
         print(e)
 
-@bp_disaster.route("/atualizar/<int:id>", methods=["POST"])
+@bp_disaster.route("/atualizar/<int:id>", methods=["POST", "GET"])
 @login_required
 @admin_required
 def atualizarDesastre(id):
     try:
-        if(request.method == "POST"):
-            atualizar = desastreDAO.atualizarDesastre(id)
-            return render_template("atualizar_desastre.html", desastres=atualizar)
-        
+      if request.method == "POST":
+            desastreDAO.atualizarDesastre(id)
+            return redirect(url_for("desastres.listarDesastres"))
+      buscar = desastreDAO.buscarDesastrePorID(id)
+      return render_template("atualizar_desastre.html", desastre=buscar)
     except Exception as e:
         print(e)

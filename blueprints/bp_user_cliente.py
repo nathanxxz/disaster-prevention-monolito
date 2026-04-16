@@ -25,6 +25,12 @@ def loginUsuarioCliente():
   except Exception as e:
     print(e)
 
+@bp_cliente.route("/dashboard")
+@login_required
+def dashboardCliente():
+    return render_template("dashboard_cliente.html")
+
+
 @bp_cliente.route("/logout",methods=["POST", "GET"])
 @login_required
 def logoutUsuarioCliente():
@@ -40,12 +46,12 @@ def logoutUsuarioCliente():
 @bp_cliente.route("/cadastrar", methods=["POST", "GET"])
 def criarUsuarioCliente():
     try:
-       
-     if(request.method == "POST" or request.method == "GET"):
+  
+     if(request.method == "POST"):
         sucesso = clienteDAO.criarUsuarioCliente()
         if(sucesso):
           return redirect(url_for("cliente.dashboardCliente"))
-        return render_template("login_cliente.html", erro="E-mail ou senha inválidos.")
+        return render_template("login_cliente.html")
      return render_template("cadastro_cliente.html")
     
     except Exception as e:
@@ -58,8 +64,8 @@ def buscarUsuarioClientePorID(id):
   try:
 
     if(request.method == "GET"):
-      clienteDAO.buscarUsuarioClientePorID(id)
-      return render_template("buscar_cliente.html")
+      cliente =  clienteDAO.buscarUsuarioClientePorID(id)
+      return render_template("buscar_cliente.html", cliente = cliente)
     
   except Exception as e:
     print(e)
@@ -71,32 +77,36 @@ def listarClientes():
   try:
 
     if(request.method == "GET"):
-      clienteDAO.listarTodosUsuariosClientes()
-      return render_template("listar_clientes.html")
+      clientes = clienteDAO.listarTodosUsuariosClientes()
+      return render_template("listar_clientes.html", clientes = clientes)
     
   except Exception as e:
     print(e)
 
 @bp_cliente.route("/excluir/<int:id>",methods=["POST"])
 @login_required
+@admin_required
 def excluirUsuarioCliente(id):
   try:
 
     if(request.method == "POST"):
       clienteDAO.excluirUsuarioCliente(id)
-      return render_template("excluir_cliente.html")
+      return redirect(url_for("cliente.listarClientes"))
     
   except Exception as e:
     print(e)
    
-@bp_cliente.route("/atualizar/<int:id>", methods=["POST"])
+@bp_cliente.route("/atualizar/<int:id>", methods=["POST", "GET"])
 @login_required
 def atualizarCliente(id):
   try:
 
     if(request.method == "POST"):
       clienteDAO.atualizarUsuarioCliente(id)
-      return render_template("atualizar_cliente.html")
+      return render_template("cliente.listarClientes")
+    
+    cliente = clienteDAO.buscarUsuarioClientePorID(id)
+    return render_template("atualizar_cliente.html", cliente=cliente)
     
   except Exception as e:
     print(e)

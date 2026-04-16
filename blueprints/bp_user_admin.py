@@ -23,6 +23,11 @@ def loginUsuarioAdmin():
   except Exception as e:
     print(e)
 
+@bp_admin.route("/dashboard")
+@login_required
+def dashboardAdmin():
+    return render_template("dashboard_admin.html")
+
 @bp_admin.route("/logout",methods=["POST"])
 @login_required
 def logoutUsuarioAdmin():
@@ -40,9 +45,9 @@ def logoutUsuarioAdmin():
 def criarUsuarioAdmin():
     try:
        
-     if(request.method == "POST" or request.method == "GET"):
-       adminDAO.criarUsuarioAdmin()
-       return redirect(url_for("admin.loginUsuarioAdmin"))
+     if(request.method == "POST"):
+        adminDAO.criarUsuarioAdmin()
+        return redirect(url_for("admin.loginUsuarioAdmin"))
 
      return render_template("cadastro_admin.html")
     
@@ -55,8 +60,8 @@ def buscarUsuarioAdminPorID(id):
   try:
 
     if(request.method == "GET"):
-      adminDAO.buscarUsuarioAdminPorID(id)
-      return render_template("buscar_admin.html")
+      admin = adminDAO.buscarUsuarioAdminPorID(id)
+      return render_template("buscar_admin.html", admin= admin)
     
   except Exception as e:
     print(e)
@@ -67,8 +72,8 @@ def listarAdmins():
   try:
 
     if(request.method == "GET"):
-      adminDAO.listarTodosUsuariosAdmin()
-      return render_template("listar_admins.html")
+      admins = adminDAO.listarTodosUsuariosAdmin()
+      return render_template("listar_admins.html", admins = admins)
     
   except Exception as e:
     print(e)
@@ -80,19 +85,22 @@ def excluirUsuarioAdmin(id):
 
     if(request.method == "POST"):
       adminDAO.excluirUsuarioAdmin(id)
-      return render_template("excluir_admin.html")
+      return redirect(url_for("admin.listarAdmins"))
     
   except Exception as e:
     print(e)
    
-@bp_admin.route("/atualizar/<int:id>", methods=["POST"])
+@bp_admin.route("/atualizar/<int:id>", methods=["POST", "GET"])
 @login_required
 def atualizarAdmin(id):
   try:
 
     if(request.method == "POST"):
       adminDAO.atualizarUsuarioAdmin(id)
-      return render_template("atualizar_admin.html")
+      return render_template("admin.listarAdmins")
+    
+    admin = adminDAO.buscarUsuarioAdminPorID(id)
+    return render_template("atualizar_admin.html", admin=admin)
     
   except Exception as e:
     print(e)

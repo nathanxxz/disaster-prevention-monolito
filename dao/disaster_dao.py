@@ -2,6 +2,7 @@ from models.disaster_model import AnaliseDesastre
 from extension import db
 from flask import request
 from datetime import datetime
+from flask_login import current_user
 
 
 class DisasterDao:
@@ -11,60 +12,39 @@ class DisasterDao:
             data = request.form
             
             if("cidade" in data and "estado" in data and "chuva_dia" in data and "acumulado_3d" in data and "acumulado_7d" in data and "risco_nivel" in data and "risco_probabilidade" in data and "data_analise" in data):
-                analiseDesastre = AnaliseDesastre(cidade= data["cidade"], estado=data["estado"], chuva_dia=data["chuva_dia"], acumulado_3d= data["acumulado_3d"], acumulado_7d=data["acumulado_7d"],risco_nivel=data["risco_nivel"], risco_probabilidade=data["risco_probabilidade"],data_analise=datetime.strptime(data["data_analise"],"%Y-%m-%d").date())
+                analiseDesastre = AnaliseDesastre(cidade= data["cidade"], estado=data["estado"], chuva_dia=data["chuva_dia"], acumulado_3d= data["acumulado_3d"], acumulado_7d=data["acumulado_7d"],risco_nivel=data["risco_nivel"], risco_probabilidade=data["risco_probabilidade"],data_analise=datetime.strptime(data["data_analise"],"%Y-%m-%d").date(), cod_user=current_user.id)
                 db.session.add(analiseDesastre)
                 db.session.commit()
-                return {"message": "Criado com sucesso"},201
+                return True
         
             
         except Exception as e:
             db.session.rollback()
             print(e)
-            return {"message": "Erro ao criar desastre"},500
+            return False
         
     def buscarDesastrePorID(self,id):
         try:
             buscar = AnaliseDesastre.query.get(id)
             
             if(buscar):
-                return({
-                    "cidade": buscar.cidade,
-                    "estado": buscar.estado,
-                    "acumulado_3d": buscar.acumulado_3d,
-                    "acumulado_7d": buscar.acumulado_7d,
-                    "risco_nivel": buscar.risco_nivel,
-                    "risco_probabilidade": buscar.risco_probabilidade,
-                    "data_analise": buscar.data_analise
-                }),200
+              return buscar
             
         except Exception as e:
             db.session.rollback()
             print(e)
-            return {"message": "Erro ao buscar desastre"},500
+            return False
     
     def listarTodosDesastres(self):
         try:
             listar = AnaliseDesastre.query.all()
-            desastres =[]
-            
             if(listar):
-                for d in listar:
-                    desastresDate = {
-                    "cidade": d.cidade,
-                    "estado": d.estado,
-                    "acumulado_3d": d.acumulado_3d,
-                    "acumulado_7d": d.acumulado_7d,
-                    "risco_nivel": d.risco_nivel,
-                    "risco_probabilidade": d.risco_probabilidade,
-                    "data_analise": d.data_analise
-                    }
-                    desastres.append(desastresDate)
-                return (desastres),200
+                return listar
             
         except Exception as e:
             db.session.rollback()
             print(e)
-            return {"message": "Erro ao listar desastres"},500
+            return False
     
     def excluirDesastre(self,id):
         try:
@@ -73,12 +53,12 @@ class DisasterDao:
             if(buscar):
                 db.session.delete(buscar)
                 db.session.commit()
-                return {"message": "Desastre apagado com sucesso"},200
+                return True
         
         except Exception as e:
             db.session.rollback()
             print(e)
-            return {"message": "Erro ao excluir desastre"},500
+            return False
         
     def atualizarDesastre(self,id):
         try:
@@ -107,12 +87,12 @@ class DisasterDao:
                     buscar.risco_probabilidade = data["risco_probabilidade"]
 
                 db.session.commit()
-                return {"message": "Desastre atualizado com sucesso"},200
+                return True
         
         except Exception as e:
             db.session.rollback()
             print(e)
-            return {"message": "Erro ao atualizar desastre"},500
+            return False
                     
                    
                     
