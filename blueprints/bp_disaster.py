@@ -26,7 +26,6 @@ def criarDesastre():
 @login_required
 def buscarDesastrePorID(id):
     try:
-
         if(request.method == "GET"):
             buscar = desastreDAO.buscarDesastrePorID(id)
             return render_template("buscar_desastre.html",desastres=buscar)
@@ -50,7 +49,6 @@ def listarDesastres():
 @admin_required
 def excluirDesastre(id):
     try:
-
         if(request.method == "POST"):
             desastreDAO.excluirDesastre(id)
             return redirect(url_for("desastres.listarDesastres"))

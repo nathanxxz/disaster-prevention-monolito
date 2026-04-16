@@ -2,7 +2,7 @@ from extension import db
 from models.user_admin_model import UsuarioAdministrador
 from flask import request
 from datetime import datetime, date
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, current_user, logout_user
 
 class UsuarioAdministradorDao:
 
@@ -57,7 +57,7 @@ class UsuarioAdministradorDao:
        
   def listarTodosUsuariosAdmin(self):
        try:
-          usuario = UsuarioAdministrador.query.all()
+          usuario = UsuarioAdministrador.query.filter_by(id=current_user.id).all()
           if(usuario):
              return usuario
       

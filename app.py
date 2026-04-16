@@ -6,7 +6,6 @@ from blueprints.bp_user_admin import bp_admin
 from blueprints.bp_user_cliente import bp_cliente
 
 
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'KJHJH3w42#n!'
@@ -17,6 +16,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 db.init_app(app)
 
 login.init_app(app)
+login.login_view = "index"
 
 app.register_blueprint(bp_admin)
 app.register_blueprint(bp_cliente)

@@ -14,9 +14,8 @@ class UsuarioClienteDao:
             usuario = UsuarioCliente(nome=data["nome"], data_nascimento=datetime.strptime(data["data_nascimento"], "%Y-%m-%d").date(), email=data["email"], senha=data["senha"], data_criacao_conta=date.today())
             db.session.add(usuario)
             db.session.commit()
-            return True
+            return usuario
             
-         
      except Exception as e:
         db.session.rollback()
         print(e)

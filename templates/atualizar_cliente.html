@@ -6,7 +6,7 @@
     <h1>✏️ Editar Perfil</h1>
     {% if cliente %}<p class="subtitle">#{{ cliente.id }} — {{ cliente.nome }}</p>{% endif %}
   </div>
-  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline">← Voltar</a>
+  <a href="{{ url_for('cliente.dashboardCliente') }}" class="btn btn-outline">← Voltar</a>
 </div>
 
 {% if cliente %}
@@ -31,7 +31,7 @@
     </div>
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Salvar alterações</button>
-      <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline">Cancelar</a>
+      <a href="{{ url_for('cliente.dashboardCliente') }}" class="btn btn-outline">Cancelar</a>
     </div>
   </form>
 </div>
@@ -39,7 +39,7 @@
 <div class="empty-state">
   <div class="empty-icon">⚠️</div>
   <h3>Cliente não encontrado</h3>
-  <a href="{{ url_for('cliente.listarClientes') }}" class="btn btn-outline">← Voltar</a>
+  <a href="{{ url_for('cliente.dashboardCliente') }}" class="btn btn-outline">← Voltar</a>
 </div>
 {% endif %}
 {% endblock %}

@@ -11,7 +11,6 @@ bp_admin = Blueprint("admin",__name__,url_prefix="/admin")
 @bp_admin.route("/login/admin", methods=["POST","GET"])
 def loginUsuarioAdmin():
   try:
-
     if(request.method == "POST" or request.method == "GET"):
        sucesso = adminDAO.loginUsuarioAdmin()
        if(sucesso):
@@ -32,7 +31,6 @@ def dashboardAdmin():
 @login_required
 def logoutUsuarioAdmin():
   try:
-
      adminDAO.logoutAdmin()
      return redirect(url_for("admin.loginUsuarioAdmin"))
     
@@ -44,7 +42,6 @@ def logoutUsuarioAdmin():
 @bp_admin.route("/cadastrar", methods=["POST", "GET"])
 def criarUsuarioAdmin():
     try:
-       
      if(request.method == "POST"):
         adminDAO.criarUsuarioAdmin()
         return redirect(url_for("admin.loginUsuarioAdmin"))
@@ -58,7 +55,6 @@ def criarUsuarioAdmin():
 @login_required
 def buscarUsuarioAdminPorID(id):
   try:
-
     if(request.method == "GET"):
       admin = adminDAO.buscarUsuarioAdminPorID(id)
       return render_template("buscar_admin.html", admin= admin)
@@ -70,7 +66,6 @@ def buscarUsuarioAdminPorID(id):
 @login_required
 def listarAdmins():
   try:
-
     if(request.method == "GET"):
       admins = adminDAO.listarTodosUsuariosAdmin()
       return render_template("listar_admins.html", admins = admins)
@@ -82,7 +77,6 @@ def listarAdmins():
 @login_required
 def excluirUsuarioAdmin(id):
   try:
-
     if(request.method == "POST"):
       adminDAO.excluirUsuarioAdmin(id)
       return redirect(url_for("admin.listarAdmins"))
@@ -94,10 +88,9 @@ def excluirUsuarioAdmin(id):
 @login_required
 def atualizarAdmin(id):
   try:
-
     if(request.method == "POST"):
       adminDAO.atualizarUsuarioAdmin(id)
-      return render_template("admin.listarAdmins")
+      return redirect(url_for('admin.listarAdmins'))
     
     admin = adminDAO.buscarUsuarioAdminPorID(id)
     return render_template("atualizar_admin.html", admin=admin)

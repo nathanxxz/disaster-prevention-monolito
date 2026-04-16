@@ -15,7 +15,7 @@ class DisasterDao:
                 analiseDesastre = AnaliseDesastre(cidade= data["cidade"], estado=data["estado"], chuva_dia=data["chuva_dia"], acumulado_3d= data["acumulado_3d"], acumulado_7d=data["acumulado_7d"],risco_nivel=data["risco_nivel"], risco_probabilidade=data["risco_probabilidade"],data_analise=datetime.strptime(data["data_analise"],"%Y-%m-%d").date(), cod_user=current_user.id)
                 db.session.add(analiseDesastre)
                 db.session.commit()
-                return True
+                return analiseDesastre
         
             
         except Exception as e:
@@ -37,9 +37,14 @@ class DisasterDao:
     
     def listarTodosDesastres(self):
         try:
-            listar = AnaliseDesastre.query.all()
-            if(listar):
-                return listar
+            if(current_user.is_admin):
+               listar = AnaliseDesastre.query.filter_by(cod_user=current_user.id).all()
+               if(listar):
+                 return listar
+            else:
+             listar = AnaliseDesastre.query.all()
+             return listar
+
             
         except Exception as e:
             db.session.rollback()
