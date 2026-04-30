@@ -5,12 +5,11 @@ from blueprints.bp_disaster import bp_disaster
 from blueprints.bp_user_admin import bp_admin
 from blueprints.bp_user_cliente import bp_cliente
 
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'KJHJH3w42#n!'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:suasenha@localhost:seuusuario/disaster-prevention-b'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:98087343@localhost:5432/disaster-prevention-b'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = True
 db.init_app(app)

@@ -7,11 +7,11 @@ from dao.disaster_dao import DisasterDao
 
 desastreDAO = DisasterDao()
 
-
 bp_disaster = Blueprint("desastres",__name__, url_prefix="/desastres")
 
 @bp_disaster.route("/criar", methods=["POST", "GET"])
 @login_required
+@admin_required
 def criarDesastre():
     try:
           if request.method == "POST":
@@ -24,6 +24,7 @@ def criarDesastre():
 
 @bp_disaster.route("/buscar/<int:id>", methods=["GET"])
 @login_required
+@admin_required
 def buscarDesastrePorID(id):
     try:
         if(request.method == "GET"):
@@ -35,6 +36,7 @@ def buscarDesastrePorID(id):
 
 @bp_disaster.route("/listar", methods=["GET"])
 @login_required
+@admin_required
 def listarDesastres():
     try:
         if(request.method == "GET"):

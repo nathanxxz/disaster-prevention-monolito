@@ -36,19 +36,16 @@ class UsuarioClienteDao:
           print(e)
           return True
 
-
   def logoutCliente(self):
          logout_user()
          return True
      
-
   def buscarUsuarioClientePorID(self,id):
        try:
           buscar = UsuarioCliente.query.get(id)
           if(buscar):
              return buscar
-            
-          
+                   
        except Exception as e:
           db.session.rollback()
           print(e)
@@ -65,7 +62,6 @@ class UsuarioClienteDao:
           print(e)
           return False
        
-
   def excluirUsuarioCliente(self,id):
        try:
           existe = UsuarioCliente.query.get(id)

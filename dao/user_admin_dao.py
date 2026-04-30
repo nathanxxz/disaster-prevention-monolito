@@ -15,7 +15,6 @@ class UsuarioAdministradorDao:
             db.session.commit()
             return True
             
-         
      except Exception as e:
         db.session.rollback()
         print(e)
@@ -60,14 +59,12 @@ class UsuarioAdministradorDao:
           usuario = UsuarioAdministrador.query.filter_by(id=current_user.id).all()
           if(usuario):
              return usuario
-      
        
        except Exception as e:
           db.session.rollback()
           print(e)
           return None
        
-
   def excluirUsuarioAdmin(self,id):
        try:
           existe = UsuarioAdministrador.query.get(id)
@@ -83,7 +80,7 @@ class UsuarioAdministradorDao:
          print(e)
          return False
     
-  def atualizarUsuarioAdmin(self,id):
+  def atualizarUsuarioAdmin(self,id):   
        try:
           data = request.form
           atualizar = UsuarioAdministrador.query.get(id)
